@@ -1,15 +1,14 @@
+import { decodeBase64 } from 'bcryptjs';
 import express from 'express'
 import morgan from 'morgan'
-import bd from './connectionBD'
+import {connect as dbcon} from './connectionBD'
 
 const app=express();
 app.use(morgan('dev'));
 
 app.get('/', async (req,res)=>{
-    console.log('get from main');
-    
-    
-    res.json('uwu');
+    const productos =await (await dbcon()).query('select * from productos');
+    res.json({productos});
 })
 
 export default app;
