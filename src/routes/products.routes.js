@@ -1,12 +1,10 @@
 import {Router} from 'express'
-import {connect as dbcon} from '../../src/connectionBD'
+import {createProduct,getAllproducts} from '../controllers/products.controller'
+
 const router=Router();
 
-router.get('/',async (req,res)=>{
-    const productos =await (await dbcon()).query('select * from productos');
-    res.json({productos});
-
-})
+router.get('/',createProduct);
+router.get('/:page',getAllproducts);
 
 
 
