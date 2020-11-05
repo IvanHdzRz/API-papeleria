@@ -12,6 +12,6 @@ export const getAllproducts=async(req,res)=>{
     const offset=(page-1)*itemsPerPage;
     console.log(page,itemsPerPage);
     res.json({itemsPerPage,page,offset});
-    //const productos =await (await dbcon()).query('select * from productos LIMIT ?, ?;',[page,itemPerPage]);
+    const productos =await (await dbcon()).query('select * from productos LIMIT ?, ?;',[page,itemPerPage]);
     //res.json(productos);
 }
