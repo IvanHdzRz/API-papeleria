@@ -1,9 +1,22 @@
 import {connect as dbcon} from '../connectionBD';
 
 export const createProduct= async (req,res)=>{
+    //se extraen los atributos del producto del cupero de la solicitud
+    const {nombre,imagen,precio,id_marca,id_cat,id_unidad,contenido,fraccionable,codigo_barras,stock,stock_min}= req.body;
+    //se llama a procedimiento almacenado insertar producto
+    (await dbcon()).query(
+            'CALL insertProducto(?,?,?,?,?,?,?,?,?,?,?);',
+            [nombre,imagen,precio,id_marca,id_cat,id_unidad,contenido,fraccionable,codigo_barras,stock,stock_min]
+        )//si lo logra insertar devuelve el id del producto
+        .then(producto=>{
+            res.json(producto[0]);
+        })// si no devuelve el codigo de error
+        .catch(e=>{
+          res.json(e);
+            
+        })
     
-/*     const productos =await (await dbcon()).query('CALL insertProducto('prueba','url.com',15,1,1,1,50,0,'071234321',10,5);');
-    res.json({productos}); */
+    
 }
 
 export const getAllproducts=async(req,res)=>{   
