@@ -41,7 +41,7 @@ export const getAllproducts=async(req,res)=>{
 
 export const getproductsById=async(req,res)=>{   
     const id= parseInt(req.params.id);
-    const product =await (await dbcon()).query('select * from productos WHERE id_articulo=?;',id);
-    res.json(product);
+    const product =await (await dbcon()).query('call getProductById(?);',id);
+    res.json(product[0]);
     //res.json(productos);
 }
