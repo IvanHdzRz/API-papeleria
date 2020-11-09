@@ -3,6 +3,8 @@ import express from 'express'
 import morgan from 'morgan'
 import cors from 'cors'
 import routesProducts from './routes/products.routes'
+import routesBrands from './routes/brands.routes'
+
 const app=express();
 app.use(morgan('dev'));
 app.use(express.json());
@@ -13,4 +15,5 @@ app.get('/', async (req,res)=>{
 })
 
 app.use('/products',routesProducts);
+app.use('/brands',routesBrands);
 export default app;
