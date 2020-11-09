@@ -5,6 +5,7 @@ import cors from 'cors'
 import routesProducts from './routes/products.routes'
 import routesBrands from './routes/brands.routes'
 import routesCategories from './routes/categories.routes'
+import routesUnits from './routes/units.routes'
 
 const app=express();
 app.use(morgan('dev'));
@@ -18,4 +19,6 @@ app.get('/', async (req,res)=>{
 app.use('/products',routesProducts);
 app.use('/brands',routesBrands);
 app.use('/categories',routesCategories);
+app.use('/units',routesUnits);
+
 export default app;
