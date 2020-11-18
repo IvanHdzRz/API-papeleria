@@ -2,7 +2,18 @@ import {connect as dbcon} from '../connectionBD';
 
 export const createProduct= async (req,res)=>{
     //se extraen los atributos del producto del cupero de la solicitud
-    const {nombre,imagen,precio,id_marca,id_cat,id_unidad,contenido,fraccionable,codigo_barras,stock,stock_min}= req.body;
+    const {
+        nombre,
+        imagen,
+        precio,
+        id_marca,
+        id_cat,
+        id_unidad,
+        contenido,
+        fraccionable,
+        codigo_barras,
+        stock,
+        stock_min}= req.body;
     //se llama a procedimiento almacenado insertar producto
     (await dbcon()).query(
             'CALL insertProducto(?,?,?,?,?,?,?,?,?,?,?);',
