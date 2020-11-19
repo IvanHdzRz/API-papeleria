@@ -32,14 +32,14 @@ export const createProduct= async (req,res)=>{
 
 export const getAllproducts=async(req,res)=>{   
     /*extraer esta logica de paginacion*/
-    const itemsPerPage=15;
+    const itemsPerPage=4;
     const page=parseInt(req.params.page);
     const offset=(page-1)*itemsPerPage;
     const countProducts= await (await dbcon()).query("select count(id_articulo) as 'items' from productos");
     const totalproducts=countProducts[0].items;
     const numberOfpages=Math.ceil(totalproducts/itemsPerPage);
     /*fin logica de paginacion*/
-    const products =await (await dbcon()).query('select * from productos LIMIT ?, ?;',[offset,itemsPerPage]);
+    const products =await (await dbcon()).query('call getProductAllProducts(?, ?);',[itemsPerPage,offset]);
     const resbody={
         totalproducts,
         page,
